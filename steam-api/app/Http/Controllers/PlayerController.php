@@ -14,8 +14,23 @@ class PlayerController extends Controller
 
         $Player = new Player($PlayerId);
 
-        // $client = new Client();
-        // $request = $client->get($url);
-        // $jsonResponse = json_decode($request->getBody());
+        if (isset($Player->steamid)) {
+            return response()->json(
+                [
+                    'response' => [
+                        'success' => true,
+                        'player' => $Player,
+                    ]
+                ]
+            );
+        }
+
+        return response()->json(
+            [
+                'response' => [
+                    'success' => false,
+                ]
+            ]
+        );
     }
 }

@@ -2,10 +2,13 @@
 
 namespace App;
 use GuzzleHttp\Client;
-use function GuzzleHttp\json_decode;
+use Validator;
 
 class Player
 {
+    protected $client;
+    protected $key;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -18,7 +21,7 @@ class Player
         'avatar',
         'avatarfull',
         'personastate',
-        'gameid'
+        'gameid',
     ];
 
     /**
@@ -40,10 +43,19 @@ class Player
         }
     }
 
-    public function get(Type $var = null)
+    public function get($id = null)
     {
-        // determine what type of id it is
-        // vanity url with or without the url parts or steamID
+        $player = $this->getBySteamId($id);
+
+        if ($player === false) {
+            $player = $this->getByVanity($id);
+        }
+
+        if ($player === false) {
+            return false;
+        }
+
+        return $this;
     }
 
     /**
@@ -65,16 +77,85 @@ class Player
             ]
         );
 
-        $response = json_decode( $request->getBody() );
+        $response = $this->validateRequest($request);
 
-        if ($response === null) {
+        if ($response === false) {
             return false;
         }
 
         if (isset($response->response->success)) {
-            if ($response->response->success) {
-
+            if ($response->response->success === 1) {
+                return $this->getBySteamId($response->response->steamid);
             }
         }
+
+        return false;
+    }
+
+    public function getBySteamId($steamId = null)
+    {
+        $request = $this->client->get(
+            "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/",
+            [
+                'query' => [
+                    'format'    => 'json',
+                    'key'       => $this->key,
+                    'steamids' => $steamId,
+                ]
+            ]
+        );
+
+        $response = $this->validateRequest($request);
+
+        if ($response === false) {
+            return false;
+        }
+
+        if (isset($response->response->players)) {
+            if (count($response->response->players) === 1) {
+                return $this->createPlayer($response->response->players[0]);
+            }
+        }
+
+        return false;
+    }
+
+    public function createPlayer($player = null)
+    {
+        if ($player === false) {
+            return false;
+        }
+
+        $this->steamid = $player->steamid;
+        $this->personaname = $player->personaname;
+        $this->profileurl = $player->profileurl;
+        $this->avatar = $player->avatar;
+        $this->avatarfull = $player->avatarfull;
+
+        //optional
+        if (isset($player->personastate))
+            $this->personastate = $player->personastate;
+
+        if (isset($player->gameid))
+            $this->gameid = $player->gameid;
+
+        return $this;
+    }
+
+    public function validateRequest($request)
+    {
+        if ($request->getStatusCode() != 200) {
+            return false;
+        }
+
+        $validator = Validator::make(['JSON' => $request->getBody()], [
+            'JSON' => 'json|required',
+        ]);
+
+        if ($validator->fails()) {
+            return false;
+        }
+
+        return json_decode( $request->getBody() );
     }
 }
