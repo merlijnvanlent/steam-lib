@@ -11,5 +11,10 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['PlayerId']], function () {
-    Route::get('account' , 'PlayerController@getPlayer');    
+    Route::get('player' , 'PlayerController@getPlayer');  
+    Route::get('player/inventory' , 'PlayerController@getLibrary');  
+});
+
+Route::group(['middleware' => ['GameId']], function () {
+    Route::get('game' , 'GameController@getGame');  
 });

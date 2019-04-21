@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Validator;
 
-class PlayerId
+class GameId
 {
     /**
      * Checks if an account id parameter is set.
@@ -18,13 +18,13 @@ class PlayerId
     public function handle(Request $request, Closure $next)
     {
         $validator = Validator::make($request->all(), [
-            'playerid' => 'required',
+            'gameid' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => 'No player id was found.'
+                'message' => 'No Game id was found.'
             ]);
         }
         return $next($request);

@@ -4,11 +4,8 @@ namespace App;
 use GuzzleHttp\Client;
 use Validator;
 
-class Player
+class Player extends Model
 {
-    protected $client;
-    protected $key;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -24,19 +21,9 @@ class Player
         'gameid',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        
-    ];
-
     function __construct($id = null)
     {
-        $this->client = new Client();
-        $this->key = env('API_KEY' , false);
+        parent::__construct();
 
         if ($id !== null) {
             return $this->get($id);
@@ -77,11 +64,7 @@ class Player
             ]
         );
 
-        $response = $this->validateRequest($request);
-
-        if ($response === false) {
-            return false;
-        }
+        $response = parent::validateRequest($request);
 
         if (isset($response->response->success)) {
             if ($response->response->success === 1) {
@@ -100,16 +83,12 @@ class Player
                 'query' => [
                     'format'    => 'json',
                     'key'       => $this->key,
-                    'steamids' => $steamId,
+                    'steamids'  => $steamId,
                 ]
             ]
         );
 
-        $response = $this->validateRequest($request);
-
-        if ($response === false) {
-            return false;
-        }
+        $response = parent::validateRequest($request);
 
         if (isset($response->response->players)) {
             if (count($response->response->players) === 1) {
@@ -142,20 +121,32 @@ class Player
         return $this;
     }
 
-    public function validateRequest($request)
+    public function getLibrary()
     {
-        if ($request->getStatusCode() != 200) {
+        if (!isset($this->steamid)) {
             return false;
         }
 
-        $validator = Validator::make(['JSON' => $request->getBody()], [
-            'JSON' => 'json|required',
-        ]);
+        $request = $this->client->get(
+            "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/",
+            [
+                'query' => [
+                    'format'    => 'json',
+                    'key'       => $this->key,
+                    'steamid'  => $this->steamid,
+                ]
+            ]
+        );
 
-        if ($validator->fails()) {
-            return false;
+        $response = parent::validateRequest($request);
+
+        if (isset($response->response->game_count)) {
+            if (is_int($response->response->game_count)) {
+                $this->library = $response->response;
+                return $this;
+            }
         }
-
-        return json_decode( $request->getBody() );
+        
+        return false;
     }
 }

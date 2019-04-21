@@ -14,7 +14,7 @@ class Party
     protected $fillable = [
         'users',
         'coop_library',
-        'libaray',
+        'library',
         'hash',
     ];
 
