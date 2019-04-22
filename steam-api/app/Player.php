@@ -1,8 +1,6 @@
 <?php
 
 namespace App;
-use GuzzleHttp\Client;
-use Validator;
 
 class Player extends Model
 {
