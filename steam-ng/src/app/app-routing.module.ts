@@ -10,7 +10,7 @@ const routes: Routes = [
     component: WelcomeComponent
   },
   {
-    path: 'start',
+    path: 'you',
     component: YouComponent
   }
 ];
