@@ -17,6 +17,8 @@ class Player extends Model
         'avatarfull',
         'personastate',
         'gameid',
+        'friends',
+        'games',
     ];
 
     function __construct($id = null)
@@ -146,5 +148,69 @@ class Player extends Model
         }
         
         return false;
+    }
+
+    public function getFriendsList()
+    {
+        if (!isset($this->steamid)) {
+            return false;
+        }
+
+        $request = $this->client->get(
+            "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/",
+            [
+                'query' => [
+                    'format'        => 'json',
+                    'key'           => $this->key,
+                    'steamid'       => $this->steamid,
+                    'relationship'  => 'friend',
+                ]
+            ]
+        );
+
+        $response = parent::validateRequest($request);
+
+        if (isset($response->friendslist->friends)) {
+            foreach ($response->friendslist->friends as $friend) {
+                unset($friend->relationship , $friend->friend_since);
+            }
+
+            $this->friends = $response->friendslist->friends;
+            return $this;
+        }
+
+        return false;
+    }
+
+    public function getFriends()
+    {
+        $response = $this->getFriendsList();
+        if ($response === false) {
+            return false;
+        }
+
+        $friends = [];
+        foreach ($this->friends as $friend) {
+            $friend = new Player($friend->steamid);
+
+            if ($friend !== false) {
+                $friends[] = $friend;
+            }
+        }
+
+        usort( $friends , function ($x , $y) {
+
+            if (isset($x->gameid)) {
+                return false;
+            } else if (isset($y->gameid)) {
+                return true;
+            }
+
+            return $x->personastate < $y->personastate;
+        });
+
+        $this->friends = $friends;
+
+        return $this;
     }
 }

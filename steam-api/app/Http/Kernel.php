@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'PlayerId' => \App\Http\Middleware\PlayerId::class,
         'GameId' => \App\Http\Middleware\GameId::class,
+        'cors' => \App\Http\Middleware\Cors::class,
     ];
 
     /**

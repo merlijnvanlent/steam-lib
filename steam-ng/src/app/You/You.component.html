@@ -1,5 +1,13 @@
-<input type="text" name="">
-
-<a class="btn btn-success" disabled="" routerLink="/party">Next <i class="fas fa-arrow-right"></i></a>
+<input 
+    type="text"
+    (input)="this.GetPlayer();"
+    [(ngModel)]="this.PlayerSlug"
+>
+<br>
+<div *ngIf="Player">
+    <img src="{{Player.avatar}}">
+    <div class="name">{{Player.personaname}}</div>
+</div>
+<button class="btn btn-success" disabled="!Player" routerLink="/party">Next <i class="fas fa-arrow-right"></i></button>
 <br>
 <a class="btn btn-warning" routerLink="/party">Skip <i class="fas fa-arrow-right"></i></a>

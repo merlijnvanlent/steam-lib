@@ -17,20 +17,12 @@ class GameController extends Controller
         if (isset($Game->steam_appid)) {
             return response()->json(
                 [
-                    'response' => [
-                        'success' => true,
-                        'game' => $Game,
-                    ]
+                    'success' => true,
+                    'game' => $Game,
                 ]
             );
         }
 
-        return response()->json(
-            [
-                'response' => [
-                    'success' => false,
-                ]
-            ]
-        );
+        return $this->returnFalse();
     }
 }

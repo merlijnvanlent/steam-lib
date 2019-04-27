@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import {Observable} from 'rxjs';
-import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import { Player } from "../models/PlayerModel";
+
+import { PlayerService } from "../services/player.service";
 
 @Component({
   selector: 'app-You',
@@ -9,11 +10,18 @@ import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
   styleUrls: ['./You.component.scss']
 })
 export class YouComponent implements OnInit {
-  public model: any;
+  Player: Player;
+  PlayerSlug: string = '';
 
-  constructor() { }
+  constructor(private PlayerService: PlayerService) { }
 
   ngOnInit() {
   }
 
+  GetPlayer() {
+    let self = this;
+    this.PlayerService.getPlayerById(self.PlayerSlug).subscribe(response => {
+      self.Player = response.player;
+    });
+  }
 }

@@ -10,4 +10,17 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function returnFalse($message = null)
+    {
+        $response = [
+            'success' => false,
+        ];
+        
+        if ($message != null) {
+            $response['message'] = $message;
+        }
+
+        return response()->json($response);
+    }
 }

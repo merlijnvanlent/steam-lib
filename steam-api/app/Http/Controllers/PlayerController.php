@@ -17,21 +17,13 @@ class PlayerController extends Controller
         if (isset($Player->steamid)) {
             return response()->json(
                 [
-                    'response' => [
-                        'success' => true,
-                        'game' => $Player,
-                    ]
+                    'success' => true,
+                    'player' => $Player,
                 ]
             );
         }
 
-        return response()->json(
-            [
-                'response' => [
-                    'success' => false,
-                ]
-            ]
-        );
+        return $this->returnFalse();
     }
 
     public function GetPlayers(Request $request)
@@ -51,26 +43,65 @@ class PlayerController extends Controller
             if ($Player !== false) {
                 return response()->json(
                     [
-                        'response' => [
-                            'success' => true,
-                            'player' => $Player,
-                        ]
+                        'success' => true,
+                        'player' => $Player,
                     ]
                 );
             }
         }
 
-        return response()->json(
-            [
-                'response' => [
-                    'success' => false,
-                ]
-            ]
-        );
+        return $this->returnFalse();
     }
 
     public function getLibraries(Request $request)
     {
         //TODO: accept and return multiple libraries
+    }
+
+    public function getFriendsList(Request $request)
+    {
+        $PlayerId = $request->input('playerid');
+        $Player = new Player($PlayerId);
+
+        if ($Player === false) {
+            return $this->returnFalse();
+        }
+
+        $Friends = $Player->getFriendsList();
+
+        if ($Friends !== false) {
+            return response()->json([
+                'success' => true,
+                'Player' => $Player,
+            ]);
+        }
+
+        return $this->returnFalse();
+    }
+
+    public function getFriends(Request $request)
+    {
+        $PlayerId = $request->input('playerid');
+        $Player = new Player($PlayerId);
+
+        if ($Player === false) {
+            return $this->returnFalse();
+        }
+
+        $Friends = $Player->getFriends();
+
+        if ($Friends !== false) {
+            return response()->json([
+                'success' => true,
+                'Player' => $Player,
+            ]);
+        }
+
+        return $this->returnFalse();
+    }
+
+    public function getFriendsLists(Request $request)
+    {
+        // TODO return multiple players with there friends.
     }
 }
