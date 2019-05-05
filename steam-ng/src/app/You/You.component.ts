@@ -19,6 +19,9 @@ export class YouComponent implements OnInit {
   }
 
   GetPlayer() {
+  }
+
+  GetSetPlayer() {
     let self = this;
     this.PlayerService.getPlayerById(self.PlayerSlug).subscribe(response => {
       self.Player = response.player;
