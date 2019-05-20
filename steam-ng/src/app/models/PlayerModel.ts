@@ -8,6 +8,6 @@ export class Player {
     avatarfull: string;
     personastate: number;
     gameid : number;
-    friends?: Player[];
+    friends?: any[];
     game?: Game;
 }

@@ -72,7 +72,7 @@ class PlayerController extends Controller
         if ($Friends !== false) {
             return response()->json([
                 'success' => true,
-                'Player' => $Player,
+                'player' => $Player,
             ]);
         }
 
@@ -93,7 +93,7 @@ class PlayerController extends Controller
         if ($Friends !== false) {
             return response()->json([
                 'success' => true,
-                'Player' => $Player,
+                'player' => $Player,
             ]);
         }
 

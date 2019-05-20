@@ -1,7 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
 
+$online: rgb(109, 207, 246);
+$offline: rgb(101, 102, 103);
+$playing: rgb(160, 243, 16);
+
 body {
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .flex {
@@ -9,15 +14,18 @@ body {
 }
 
 .online {
-    color: rgb(109, 207, 246);
+    color: $online !important;
+    border-color: $online !important;
 }
 
 .offline {
-    color: rgb(101, 102, 103);
+    color: $offline !important;
+    border-color: $offline !important;
 }
 
 .playing {
-    color: rgb(160, 243, 16);
+    color: $playing !important;
+    border-color: $playing !important;
 }
 
 a:hover {
