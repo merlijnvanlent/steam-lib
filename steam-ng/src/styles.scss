@@ -1,6 +1,25 @@
 @import '~bootstrap/scss/bootstrap';
 
 body {
-    background-image: linear-gradient(to right top, #0000ff, #6e009f, #600054, #390023, #000000);
     min-height: 100vh;
+}
+
+.flex {
+    display: flex;
+}
+
+.online {
+    color: rgb(109, 207, 246);
+}
+
+.offline {
+    color: rgb(101, 102, 103);
+}
+
+.playing {
+    color: rgb(160, 243, 16);
+}
+
+a:hover {
+    text-decoration: none;
 }

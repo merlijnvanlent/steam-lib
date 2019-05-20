@@ -1,0 +1,5 @@
+<div class="problem-wrap">
+  <ngb-alert [dismissible]="false" *ngIf="!closed && problem" [type]="problem.type">
+    {{ problem.message }}
+  </ngb-alert>
+</div>

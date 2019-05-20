@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { WelcomeComponent } from './Welcome/Welcome.component';
-import { YouComponent } from './You/You.component';
+import { StartComponent } from './Start/Start.component';
+import { PartyComponent } from './Party/Party.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: WelcomeComponent
+    component: StartComponent
   },
   {
-    path: 'you',
-    component: YouComponent
+    path: 'party',
+    component: PartyComponent
   }
 ];
 

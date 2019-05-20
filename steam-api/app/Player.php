@@ -18,7 +18,7 @@ class Player extends Model
         'personastate',
         'gameid',
         'friends',
-        'games',
+        'game',
     ];
 
     function __construct($id = null)
@@ -40,6 +40,12 @@ class Player extends Model
 
         if ($player === false) {
             return false;
+        }
+
+        if (isset($player->gameid)) {
+            if (!empty($game = new Game($player->gameid))) {
+                $player->game = $game;
+            }
         }
 
         return $this;

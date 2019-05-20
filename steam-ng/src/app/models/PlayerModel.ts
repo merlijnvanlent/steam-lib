@@ -1,3 +1,5 @@
+import { Game } from './GameModel';
+
 export class Player {
     steamid: number;
     personaname: string;
@@ -7,4 +9,5 @@ export class Player {
     personastate: number;
     gameid : number;
     friends?: Player[];
+    game?: Game;
 }

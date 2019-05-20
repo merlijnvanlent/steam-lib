@@ -1,0 +1,18 @@
+.wrap {
+  text-align: center;
+  margin-top: 2.5rem;
+  .flex {
+    margin-top: 5rem;
+    width: 60vw;
+    justify-content: space-around;
+    align-items: center;
+    .column {
+      flex: 0 1 40%;
+      .players {
+        
+        border: 1px solid black;
+        border-radius: 0.5rem;
+      }
+    }
+  }
+}

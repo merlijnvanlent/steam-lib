@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Mockery\Undefined;
+
 class Game extends Model
 {
     /**
@@ -72,10 +74,12 @@ class Game extends Model
         $this->header_image = $game->header_image;
         $this->developers = $game->developers;
         $this->publishers = $game->publishers;
-        $this->price_overview = $game->price_overview;
         $this->platforms = $game->platforms;
         $this->categories = $game->categories;
         $this->release_date = $game->release_date;
+
+        if (isset($game->price_overview))
+            $this->price_overview = $game->price_overview;
 
         return $this;
     }

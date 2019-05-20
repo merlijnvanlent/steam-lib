@@ -6,6 +6,8 @@ import { Player } from "../models/PlayerModel";
   providedIn: 'root'
 })
 export class PlayerService {
+  player: Player;
+  party: Player[];
 
   constructor(
     private http: HttpClient,
@@ -14,5 +16,21 @@ export class PlayerService {
   getPlayerById(id) {
     let params = new HttpParams().set('playerid' , id);
     return this.http.get<any>('player' , {params : params})
+  }
+
+  setPlayer(player: Player) {
+    this.player = player;
+  }
+
+  getPlayer() {
+    return this.player;
+  }
+
+  setParty(party: Player[]) {
+    this.party = party;
+  }
+
+  getParty() {
+    return this.party;
   }
 }

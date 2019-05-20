@@ -1,15 +1,13 @@
 .main-wrap {
-    margin: 1rem;
-    // @include media-breakpoint-up(sm) { 
-    //     margin: 5rem;
-    // }
-    // @include media-breakpoint-up(md) {
-    //     margin: 10rem;
-    // }
-    // @include media-breakpoint-up(lg) {
-    //     margin:20rem;
-    // }
-    // @include media-breakpoint-up(xl) {
-    //     margin:35rem;
-    // }
+    min-height: 100vh;
+
+    .wrap {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+        *:not(router-outlet):not(app-problem) {
+            width: 80%;
+        }
+    }
 }

@@ -6,16 +6,18 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WelcomeComponent } from './Welcome/Welcome.component';
-import { YouComponent } from './You/You.component';
+import { StartComponent } from './Start/Start.component';
+import { PartyComponent } from './Party/Party.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpConfigInterceptor } from './http-interceptor';
+import { ProblemComponent } from './problem/problem.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent,
-    YouComponent
+    StartComponent,
+    PartyComponent,
+    ProblemComponent
   ],
   imports: [
     BrowserModule,
