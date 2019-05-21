@@ -7,19 +7,15 @@
       <h3>Players in your party</h3>
       <div class="players">
         <div *ngFor="let player of PlayerService.getParty()" class="player">
-          {{ player.personaname }}
+          <app-player [player]="player"></app-player>
         </div>
       </div>
     </div>
     <div class="column friends">
       <h3>Players from your friend list.</h3>
       <div class="players">
-        <div *ngFor="let player of friends" class="player">
-          <img [ngClass]="GlobalService.class(player)" [src]="player.avatarfull" [alt]="player.personaname + ' profile picture'">
-          <div class="text-wrap">
-            <h5 [ngClass]="GlobalService.class(player)" >{{ player.personaname }}</h5>
-            <p [ngClass]="GlobalService.class(player)" *ngIf="player.game">{{player.game.name}}</p>
-          </div>
+        <div *ngFor="let player of FriendsService.all()">
+          <app-player [player]="player"></app-player>
         </div>
       </div>
       <div class="form-group">

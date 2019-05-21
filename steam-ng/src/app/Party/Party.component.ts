@@ -3,6 +3,7 @@ import { Player } from '../models/PlayerModel';
 import { PlayerService } from '../services/player.service';
 import { ProblemService } from '../services/problem.service';
 import { GlobalService } from '../services/global.service';
+import { FriendsService } from '../services/friends.service';
 
 @Component({
   selector: 'app-Party',
@@ -10,15 +11,17 @@ import { GlobalService } from '../services/global.service';
   styleUrls: ['./Party.component.scss']
 })
 export class PartyComponent implements OnInit {
-  friends: Player[] = [];
   loading: number = 0;
-  constructor(private PlayerService:PlayerService, private ProblemService: ProblemService, private GlobalService: GlobalService) { }
+  constructor(private FriendsService: FriendsService, private PlayerService:PlayerService, private ProblemService: ProblemService) { }
 
   ngOnInit() {
     let self =  this;
     if (!this.PlayerService.getPlayer()) {
       return;
     }
+
+    this.PlayerService.setParty([]);
+
     this.PlayerService.addPlayerToParty(this.PlayerService.getPlayer());
     this.PlayerService.getFriends(this.PlayerService.getPlayer().steamid).subscribe((result) => {
       if (!result.success) {
@@ -39,13 +42,9 @@ export class PartyComponent implements OnInit {
             });
           }
 
-          self.friends.push(result.player);
+          self.FriendsService.add(result.player);
         });
       });
     })
   }
-
-  
-  
-
 }

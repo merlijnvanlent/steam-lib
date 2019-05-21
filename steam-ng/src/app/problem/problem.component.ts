@@ -5,9 +5,9 @@ import { ProblemService } from '../services/problem.service';
 import { Problem } from '../models/ProblemModel';
 
 @Component({
-  selector: 'app-problem',
-  templateUrl: './problem.component.html',
-  styleUrls: ['./problem.component.scss']
+  selector: 'app-Problem',
+  templateUrl: './Problem.component.html',
+  styleUrls: ['./Problem.component.scss']
 })
 export class ProblemComponent implements OnInit {
 

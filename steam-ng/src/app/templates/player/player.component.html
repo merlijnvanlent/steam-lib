@@ -1,0 +1,13 @@
+<div class="player">
+  <img
+    [ngClass]="GlobalService.class(player)"
+    [src]="player.avatarfull"
+    [alt]="player.personaname + ' profile picture'"
+  />
+  <div class="text-wrap">
+    <h5 [ngClass]="GlobalService.class(player)">{{ player.personaname }}</h5>
+    <p [ngClass]="GlobalService.class(player)" *ngIf="player.game">
+      {{ player.game.name }}
+    </p>
+  </div>
+</div>
