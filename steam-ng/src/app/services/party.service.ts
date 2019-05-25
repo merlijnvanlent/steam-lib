@@ -4,7 +4,7 @@ import { Player } from '../models/PlayerModel';
 @Injectable({
   providedIn: 'root'
 })
-export class FriendsService {
+export class PartyService {
 
   constructor() { }
 
@@ -41,6 +41,23 @@ export class FriendsService {
     this.playing = [];
     this.online = [];
     this.offline = [];
+  }
+
+  remove(player: Player) {
+    let i = this.playing.findIndex(x => x.steamid == player.steamid);
+    if (i !== -1) {
+      this.playing.splice(i, 1);
+    }
+
+    i = this.online.findIndex(x => x.steamid == player.steamid);
+    if (i !== -1) {
+      this.online.splice(i, 1);
+    }
+
+    i = this.offline.findIndex(x => x.steamid == player.steamid);
+    if (i !== -1) {
+      this.offline.splice(i, 1);
+    }
   }
 
   check(player: Player) {

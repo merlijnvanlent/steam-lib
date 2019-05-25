@@ -4,6 +4,8 @@ import { PlayerService } from '../services/player.service';
 import { ProblemService } from '../services/problem.service';
 import { GlobalService } from '../services/global.service';
 import { FriendsService } from '../services/friends.service';
+import { PartyService } from '../services/party.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-Party',
@@ -12,7 +14,9 @@ import { FriendsService } from '../services/friends.service';
 })
 export class PartyComponent implements OnInit {
   loading: number = 0;
-  constructor(private FriendsService: FriendsService, private PlayerService:PlayerService, private ProblemService: ProblemService) { }
+  request: Subscription;
+  friend: string;
+  constructor(private PartyService: PartyService, private FriendsService: FriendsService, private PlayerService:PlayerService, private ProblemService: ProblemService) { }
 
   ngOnInit() {
     let self =  this;
@@ -20,9 +24,9 @@ export class PartyComponent implements OnInit {
       return;
     }
 
-    this.PlayerService.setParty([]);
+    this.FriendsService.clear();
+    this.PartyService.add(this.PlayerService.getPlayer());
 
-    this.PlayerService.addPlayerToParty(this.PlayerService.getPlayer());
     this.PlayerService.getFriends(this.PlayerService.getPlayer().steamid).subscribe((result) => {
       if (!result.success) {
         self.ProblemService.problem({
@@ -32,6 +36,7 @@ export class PartyComponent implements OnInit {
       }
       
       this.PlayerService.setPlayer(result.player);
+      
 
       this.PlayerService.getPlayer().friends.forEach(x => {
         self.PlayerService.getPlayerById(x.steamid).subscribe(result => {
@@ -46,5 +51,28 @@ export class PartyComponent implements OnInit {
         });
       });
     })
+  }
+  
+  getPlayer() {
+    let self = this;
+
+    if (this.request) {
+      this.request.unsubscribe();
+    }
+
+    this.request = this.PlayerService.getPlayerById(this.friend).subscribe(response => {
+      if (response.success) {
+        this.PartyService.add(response.player);
+        this.friend = '';
+        return;
+      }
+
+      let problem = {
+        type: 'warning',
+        message: 'No results matched. Pleas try again.'
+      }
+
+      self.ProblemService.problem(problem);
+    });
   }
 }

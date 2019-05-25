@@ -7,13 +7,15 @@ import { Player } from "../models/PlayerModel";
 })
 export class PlayerService {
   player: Player;
-  party: Player[] = [];
 
   constructor(
     private http: HttpClient,
   ) { }
 
-  getPlayerById(id) {
+  getPlayerById(id: any) {
+    if (id.includes('/')) {
+      id = id.split('/').filter(x => x).reverse()[0]; 
+    }
     let params = new HttpParams().set('playerid' , id);
     return this.http.get<any>('player' , {params : params})
   }
@@ -29,21 +31,5 @@ export class PlayerService {
 
   getPlayer() {
     return this.player;
-  }
-
-  setParty(party: Player[]) {
-    this.party = party;
-  }
-
-  getParty() {
-    return this.party;
-  }
-
-  addPlayerToParty(player: Player) {
-    this.party.push(player);
-  }
-
-  removePlayerFromParty(id: any) {
-
   }
 }

@@ -1,33 +1,32 @@
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
 $online: rgb(109, 207, 246);
 $offline: rgb(101, 102, 103);
 $playing: rgb(160, 243, 16);
 
 body {
-    height: 100vh;
-    overflow: hidden;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .online {
-    color: $online !important;
-    border-color: $online !important;
+  color: $online !important;
+  border-color: $online !important;
+  text-decoration-color: $online;
 }
 
 .offline {
-    color: $offline !important;
-    border-color: $offline !important;
+  color: $offline !important;
+  border-color: $offline !important;
+  text-decoration-color: $offline;
 }
 
 .playing {
-    color: $playing !important;
-    border-color: $playing !important;
-}
-
-a:hover {
-    text-decoration: none;
+  color: $playing !important;
+  border-color: $playing !important;
+  text-decoration-color: $playing;
 }

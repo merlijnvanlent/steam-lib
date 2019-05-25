@@ -11,4 +11,11 @@
   h5 {
     margin-bottom: 0;
   }
+  p {
+    margin: 0;
+  }
+
+  &:hover {
+    background-color: #F1F1F1;
+  }
 }

@@ -26,10 +26,6 @@ export class StartComponent implements OnInit {
       this.request.unsubscribe();
     }
 
-    if (input.includes('/')) {
-      input = input.split('/').filter(x => x).reverse()[0]; 
-    }
-
     this.request = this.PlayerService.getPlayerById(input).subscribe(response => {
       if (response.success) {
         this.PlayerService.setPlayer(response.player);

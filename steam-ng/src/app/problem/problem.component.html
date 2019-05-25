@@ -1,4 +1,4 @@
-<div class="problem-wrap">
+<div class="problem-wrap" (click)="closed = true">
   <ngb-alert [dismissible]="false" *ngIf="!closed && problem" [type]="problem.type">
     {{ problem.message }}
   </ngb-alert>
