@@ -4,7 +4,7 @@
 
   <div class="nav">
     <a routerLink="/" class="btn btn-secondary">Back</a>
-    <button class="btn btn-success" [disabled]="PartyService.all().length < 2">Let's play a game</button>
+    <button class="btn btn-success" routerLink="/library" [disabled]="PartyService.all().length < 2">Let's play a game</button>
   </div>
 
   <div class="flex">

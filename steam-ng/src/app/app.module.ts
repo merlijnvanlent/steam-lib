@@ -13,6 +13,7 @@ import { PlayerComponent } from './templates/player/player.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpConfigInterceptor } from './http-interceptor';
 import { ProblemComponent } from './Problem/Problem.component';
+import { LibraryComponent } from './library/library.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProblemComponent } from './Problem/Problem.component';
     PlayerComponent,
     PartyComponent,
     ProblemComponent,
-    PlayerComponent
+    PlayerComponent,
+    LibraryComponent
   ],
   imports: [
     BrowserModule,

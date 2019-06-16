@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { StartComponent } from './Start/Start.component';
 import { PartyComponent } from './Party/Party.component';
+import { LibraryComponent } from './library/library.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'party',
     component: PartyComponent
+  },
+  {
+    path: 'library',
+    component: LibraryComponent,
   }
 ];
 

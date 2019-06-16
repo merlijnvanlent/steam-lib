@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'PlayerId' => \App\Http\Middleware\PlayerId::class,
         'GameId' => \App\Http\Middleware\GameId::class,
         'cors' => \App\Http\Middleware\Cors::class,
+        'PartyPeople' => \App\Http\Middleware\PartyPeople::class,
     ];
 
     /**

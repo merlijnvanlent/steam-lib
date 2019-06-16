@@ -9,9 +9,7 @@ Route::get('/', function () {
     return view('default');
 });
 
-
 Route::group(['middleware' => ['cors']], function () {
-
     Route::group(['middleware' => ['PlayerId']], function () {
         Route::get('player' , 'PlayerController@getPlayer');  
         Route::get('player/inventory' , 'PlayerController@getLibrary');
@@ -24,4 +22,7 @@ Route::group(['middleware' => ['cors']], function () {
         Route::get('game' , 'GameController@getGame');  
     });
 
+    Route::group(['middleware' => ['PartyPeople']], function () {
+        route::get('party', 'partyController@getParty');
+    });
 });

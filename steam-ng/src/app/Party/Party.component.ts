@@ -25,6 +25,7 @@ export class PartyComponent implements OnInit {
     }
 
     this.FriendsService.clear();
+    this.PartyService.clear();
     this.PartyService.add(this.PlayerService.getPlayer());
 
     this.PlayerService.getFriends(this.PlayerService.getPlayer().steamid).subscribe((result) => {
