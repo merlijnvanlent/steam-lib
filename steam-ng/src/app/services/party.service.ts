@@ -66,4 +66,13 @@ export class PartyService {
     }
     return false;
   }
+
+  get(steamid: number) {
+    let player = this.all().find(x => x.steamid == steamid);
+    if (player) {
+      return player;
+    }
+
+    return false;
+  }
 }

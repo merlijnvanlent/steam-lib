@@ -11,7 +11,6 @@ export class GameService {
   constructor(private PartyService: PartyService, private http: HttpClient) { }
 
   getLibraryForParty() {
-    debugger;
     let party = this.PartyService.all();
     let params = new HttpParams();
 
@@ -21,7 +20,9 @@ export class GameService {
 
     return this.http.get<any>('party' , {params : params})
   }
-  getGame(gameId: string) {
 
+  getGame(gameid: string) {
+    let params = new HttpParams().set('gameid' , gameid);
+    return this.http.get<any>('game' , {params : params})
   }
 }

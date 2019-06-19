@@ -3,6 +3,8 @@ import { PartyService } from '../services/party.service';
 import { Router } from '@angular/router';
 import { GameService } from '../services/game.service';
 import { Game } from '../models/GameModel';
+import { ProblemService } from '../services/problem.service';
+import { GlobalService } from '../services/global.service';
 
 @Component({
   selector: 'app-library',
@@ -11,9 +13,9 @@ import { Game } from '../models/GameModel';
 })
 export class LibraryComponent implements OnInit {
 
-  games: Game[] = []
+  gameIds: [] = []
 
-  constructor(private PartyService: PartyService, private router: Router, private GameService: GameService) { }
+  constructor(private PartyService: PartyService, private router: Router, private GameService: GameService, private ProblemService: ProblemService) { }
 
   ngOnInit() {
     const party = this.PartyService.all();
@@ -23,9 +25,17 @@ export class LibraryComponent implements OnInit {
       return;
     }
 
+    let self = this;
+
     this.GameService.getLibraryForParty().subscribe((result) => {
-      debugger;
+      if (!result.success) {
+        self.ProblemService.problem({
+          type: 'danger',
+          message: 'Something went wrong. Pleas try again.',
+        });
+      }
+
+      self.gameIds = result.partyLibrary;
     });
   }
-
 }

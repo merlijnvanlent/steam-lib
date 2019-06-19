@@ -19,6 +19,9 @@
     <div class="column friends">
       <h3>Players from your friend list.</h3>
       <div class="players">
+        <div class="spinner-wrap" *ngIf="!FriendsService.all().length">
+          <app-spinner></app-spinner>
+        </div>
         <div *ngFor="let player of FriendsService.all()">
           <div *ngIf="!PartyService.check(player)" (click)="PartyService.add(player)">
             <app-player [player]="player"></app-player>

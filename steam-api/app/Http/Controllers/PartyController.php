@@ -34,12 +34,18 @@ class PartyController extends Controller {
         }
         else
         {
-          $partyLibrary[$game->appid] = new LibraryGame(null , $player);
+          $partyLibrary[$game->appid] = new LibraryGame($game->appid , $player);
         }
       }
-
-
     }
+
+    usort($partyLibrary, function($a, $b) {
+      if (count($a->players) ==  count($b->players)) {
+        return 0;
+      }
+
+      return (count($a->players) > count($b->players)) ? -1 : 1;
+    });
 
     if (count($partyLibrary)) {
       return response()->json([

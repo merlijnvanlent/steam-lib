@@ -14,6 +14,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpConfigInterceptor } from './http-interceptor';
 import { ProblemComponent } from './Problem/Problem.component';
 import { LibraryComponent } from './library/library.component';
+import { GameComponent } from './templates/game/game.component';
+import { SpinnerComponent } from './templates/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { LibraryComponent } from './library/library.component';
     PartyComponent,
     ProblemComponent,
     PlayerComponent,
-    LibraryComponent
+    LibraryComponent,
+    GameComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
