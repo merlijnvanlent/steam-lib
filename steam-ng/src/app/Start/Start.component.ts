@@ -8,7 +8,7 @@ import { GlobalService } from '../services/global.service';
 @Component({
   selector: 'app-Start',
   templateUrl: './Start.component.html',
-  styleUrls: ['./start.component.scss']
+  styleUrls: ['./Start.component.scss']
 })
 export class StartComponent implements OnInit {
   request: Subscription;

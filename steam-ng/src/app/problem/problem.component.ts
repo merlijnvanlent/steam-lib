@@ -6,8 +6,8 @@ import { Problem } from '../models/ProblemModel';
 
 @Component({
   selector: 'app-Problem',
-  templateUrl: './Problem.component.html',
-  styleUrls: ['./Problem.component.scss']
+  templateUrl: './problem.component.html',
+  styleUrls: ['./problem.component.scss']
 })
 export class ProblemComponent implements OnInit {
 

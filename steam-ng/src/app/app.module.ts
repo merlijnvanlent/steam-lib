@@ -12,7 +12,7 @@ import { PartyComponent } from './Party/Party.component'
 import { PlayerComponent } from './templates/player/player.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpConfigInterceptor } from './http-interceptor';
-import { ProblemComponent } from './Problem/Problem.component';
+import { ProblemComponent } from './problem/problem.component';
 import { LibraryComponent } from './library/library.component';
 import { GameComponent } from './templates/game/game.component';
 import { SpinnerComponent } from './templates/spinner/spinner.component';

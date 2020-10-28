@@ -13,7 +13,7 @@ import { map, catchError } from 'rxjs/operators';
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         //TODO: get this from env variable.
-        request = request.clone({ url: `http://steamapi.test/${request.url}` });
+        request = request.clone({ url: `http://steam-lib.test/${request.url}` });
 
         return next.handle(request).pipe(
             catchError((error: HttpErrorResponse) => {
