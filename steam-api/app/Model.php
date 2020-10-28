@@ -12,7 +12,7 @@ class Model
     function __construct()
     {
         $this->client = new Client();
-        $this->key = '31848E1A1F4CE64106272E040B4B1861'; // env('API_KEY' , false);
+        $this->key = env('API_KEY' , false);
     }
 
     public function validateRequest($request)
